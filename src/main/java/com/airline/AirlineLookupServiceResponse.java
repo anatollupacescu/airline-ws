@@ -14,10 +14,10 @@ public class AirlineLookupServiceResponse {
     private String departureDate; // Date Time in ISO8601
     private String arrivalDate;
 
-    private final static DateTimeFormatter ISO8601_DateFormat = DateTimeFormatter.ofPattern("L-d-u");
+    private static final DateTimeFormatter ISO8601_DateFormat = DateTimeFormatter.ofPattern("L-d-u");
 
     public AirlineLookupServiceResponse() {
-
+        //it's empty because jackson needs it, FFS
     }
 
     public AirlineLookupServiceResponse(String airline, String supplier, String fare, String departureAirportCode,

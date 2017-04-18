@@ -1,6 +1,7 @@
 package com.airline;
 
 import com.airline.ws.WebServiceClientHelper;
+import jersey.repackaged.com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 @SpringBootApplication
 public class JavaTestApplication extends SpringBootServletInitializer {
@@ -33,6 +35,15 @@ public class JavaTestApplication extends SpringBootServletInitializer {
     @Bean
     public WebServiceClientHelper webServiceClientHelper() {
         return new WebServiceClientHelper();
+    }
+
+    @Bean
+    public ScheduledExecutorService scheduler () {
+        return Executors.newScheduledThreadPool(1,
+                new ThreadFactoryBuilder()
+                        .setDaemon(true)
+                        .setNameFormat("failAfter-%d")
+                        .build());
     }
 
     @Component

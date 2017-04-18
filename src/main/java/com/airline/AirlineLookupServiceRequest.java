@@ -1,5 +1,7 @@
 package com.airline;
 
+import com.airline.ws.IncorrectDateException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,7 +14,7 @@ public class AirlineLookupServiceRequest {
     public final LocalDate returnDate;
     public final Integer numberOfPassengers;
 
-    private final static DateTimeFormatter ISO8601_DateTimeFormat = DateTimeFormatter.ofPattern("L-d-u H:m:s");
+    private static final DateTimeFormatter ISO8601_DateTimeFormat = DateTimeFormatter.ofPattern("L-d-u H:m:s");
 
     public AirlineLookupServiceRequest(String origin, String destination, String departureDate, String returnDate, String numberOfPassengers) {
         this.origin = origin;
@@ -26,7 +28,7 @@ public class AirlineLookupServiceRequest {
         try {
             return LocalDate.parse(date, ISO8601_DateTimeFormat);
         } catch (DateTimeParseException e) {
-            throw new RuntimeException("Date could not be parsed: " + date, e);
+            throw new IncorrectDateException("Date could not be parsed: " + date, e);
         }
     }
 }

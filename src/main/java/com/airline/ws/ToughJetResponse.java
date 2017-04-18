@@ -1,18 +1,19 @@
 package com.airline.ws;
 
 public class ToughJetResponse {
-    public String carrier; //; //; // Name of the Airline
-    public String basePrice; // Price without tax(doesn’t include discount)
-    public String tax; // Tax which needs to be charged along with the price
-    public String discount; // Discount which needs to be applied on the price(in percentage)
-    public String departureAirportName; // 3 letter IATA code(eg. LHR, AMS)
-    public String arrivalAirportName; // 3 letter IATA code(eg. LHR, AMS)
-    public String departureDay; // Day of the Month
-    public String departureMonth; // Month as an Integer(1-12)
-    public String departureYear; // 4 digit Year
-    public String returnDay; // Day of the Month
-    public String returnMonth; // Month as an Integer(1-12)
-    public String returnYear;
+
+    private String carrier; //; //; // Name of the Airline
+    private String basePrice; // Price without tax(doesn’t include discount)
+    private String tax; // Tax which needs to be charged along with the price
+    private String discount; // Discount which needs to be applied on the price(in percentage)
+    private String departureAirportName; // 3 letter IATA code(eg. LHR, AMS)
+    private String arrivalAirportName; // 3 letter IATA code(eg. LHR, AMS)
+    private String departureDay; // Day of the Month
+    private String departureMonth; // Month as an Integer(1-12)
+    private String departureYear; // 4 digit Year
+    private String returnDay; // Day of the Month
+    private String returnMonth; // Month as an Integer(1-12)
+    private String returnYear;
 
     public ToughJetResponse() {
 
@@ -32,6 +33,102 @@ public class ToughJetResponse {
         this.departureYear = departureYear;
         this.returnDay = returnDay;
         this.returnMonth = returnMonth;
+        this.returnYear = returnYear;
+    }
+
+    public String getCarrier() {
+        return carrier;
+    }
+
+    public void setCarrier(String carrier) {
+        this.carrier = carrier;
+    }
+
+    public String getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(String basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public String getTax() {
+        return tax;
+    }
+
+    public void setTax(String tax) {
+        this.tax = tax;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public String getDepartureAirportName() {
+        return departureAirportName;
+    }
+
+    public void setDepartureAirportName(String departureAirportName) {
+        this.departureAirportName = departureAirportName;
+    }
+
+    public String getArrivalAirportName() {
+        return arrivalAirportName;
+    }
+
+    public void setArrivalAirportName(String arrivalAirportName) {
+        this.arrivalAirportName = arrivalAirportName;
+    }
+
+    public String getDepartureDay() {
+        return departureDay;
+    }
+
+    public void setDepartureDay(String departureDay) {
+        this.departureDay = departureDay;
+    }
+
+    public String getDepartureMonth() {
+        return departureMonth;
+    }
+
+    public void setDepartureMonth(String departureMonth) {
+        this.departureMonth = departureMonth;
+    }
+
+    public String getDepartureYear() {
+        return departureYear;
+    }
+
+    public void setDepartureYear(String departureYear) {
+        this.departureYear = departureYear;
+    }
+
+    public String getReturnDay() {
+        return returnDay;
+    }
+
+    public void setReturnDay(String returnDay) {
+        this.returnDay = returnDay;
+    }
+
+    public String getReturnMonth() {
+        return returnMonth;
+    }
+
+    public void setReturnMonth(String returnMonth) {
+        this.returnMonth = returnMonth;
+    }
+
+    public String getReturnYear() {
+        return returnYear;
+    }
+
+    public void setReturnYear(String returnYear) {
         this.returnYear = returnYear;
     }
 }

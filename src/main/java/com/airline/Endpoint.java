@@ -1,7 +1,6 @@
 package com.airline;
 
 import com.airline.ws.WebServiceClientHelper;
-import jersey.repackaged.com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -32,11 +30,12 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 @Path("/airline")
 public class Endpoint {
 
-    private final static Logger logger = LoggerFactory.getLogger(Endpoint.class);
+    private static final Logger logger = LoggerFactory.getLogger(Endpoint.class);
 
     @Resource(name="crazyAirService") private AirlineLookupService crazyAirService;
     @Resource(name="toughJetService") private AirlineLookupService toughAirService;
     @Inject private ExecutorService executorService;
+    @Inject private ScheduledExecutorService scheduler;
     @Inject private WebServiceClientHelper webServiceClientHelper;
     @Value("${endpoint.timeout}")
     private Long requestTimeout;
@@ -77,7 +76,7 @@ public class Endpoint {
         return crazyAirService.find(crazyAirRequestMap);
     }
 
-    public static CompletableFuture<List<AirlineLookupServiceResponse>> failAfter(Duration duration) {
+    public CompletableFuture<List<AirlineLookupServiceResponse>> failAfter(Duration duration) {
         final CompletableFuture<List<AirlineLookupServiceResponse>> promise = new CompletableFuture<>();
         scheduler.schedule(() -> {
             logger.info("Timeout occurred while calling remote services");
@@ -85,12 +84,4 @@ public class Endpoint {
         },  duration.toMillis(), MILLISECONDS);
         return promise;
     }
-
-    private static final ScheduledExecutorService scheduler =
-            Executors.newScheduledThreadPool(
-                    1,
-                    new ThreadFactoryBuilder()
-                            .setDaemon(true)
-                            .setNameFormat("failAfter-%d")
-                            .build());
 }

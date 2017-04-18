@@ -24,12 +24,12 @@ public class CrazyAirService implements AirlineLookupService {
     }
 
     private AirlineLookupServiceResponse mapFromCrazyAir(CrazyAirResponse crazyAirResponse) {
-        return new AirlineLookupServiceResponse(crazyAirResponse.airline, "crazyAir",
-                crazyAirResponse.price,
-                crazyAirResponse.destinationAirportCode,
-                crazyAirResponse.destinationAirportCode,
-                parseCrazyAirDate(crazyAirResponse.departureDate),
-                parseCrazyAirDate(crazyAirResponse.arrivalDate));
+        return new AirlineLookupServiceResponse(crazyAirResponse.getAirline(), "crazyAir",
+                crazyAirResponse.getPrice(),
+                crazyAirResponse.getDepartureAirportCode(),
+                crazyAirResponse.getDestinationAirportCode(),
+                parseCrazyAirDate(crazyAirResponse.getDepartureDate()),
+                parseCrazyAirDate(crazyAirResponse.getArrivalDate()));
     }
 
     private final static DateTimeFormatter crazyAirResponseDateFormatter = DateTimeFormatter.ofPattern("L-d-u H:m:s");
@@ -38,7 +38,7 @@ public class CrazyAirService implements AirlineLookupService {
         try {
             return LocalDate.parse(date, crazyAirResponseDateFormatter);
         } catch (DateTimeParseException e) {
-            throw new RuntimeException("Could not parse date " + date, e);
+            throw new IncorrectDateException("Could not parse date " + date, e);
         }
     }
 }
